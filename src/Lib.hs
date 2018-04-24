@@ -2,8 +2,8 @@
 
 module Lib where
 
-import Web.Fn
-import Network.Wai (Response, Application)
+import           Network.Wai (Application, Response)
+import           Web.Fn
 
 data Context = Context { req :: FnRequest }
 instance RequestContext Context where
@@ -14,7 +14,8 @@ waiApp :: Application
 waiApp = toWAI (Context defaultFnRequest) site
 
 site :: Context -> IO Response
-site ctxt = route ctxt [ end ==> indexHandler ]
+site ctxt = route ctxt [ end ==> indexHandler
+                       , path "hangman" ==> indexHandler]
   `fallthrough` notFoundText "That page is not found"
 
 indexHandler :: Context -> IO (Maybe Response)

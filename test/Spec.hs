@@ -1,10 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Test.Hspec
-import Test.Hspec.Fn
-import Web.Fn
+import           Test.Hspec
+import           Test.Hspec.Fn
+import           Web.Fn
 
-import Lib
+import           Lib
 
 main :: IO ()
 main =
@@ -13,7 +13,10 @@ main =
   hspec $ fn (return ctxt) app [] (const $ return ()) specs
 
 specs :: SpecWith (FnHspecState Context)
-specs =
+specs = do
  describe "index" $
    it "should 200" $
       get "/" >>= should200
+ describe "hangman" $
+   it "should 200" $
+      get "/hangman" >>= should200
