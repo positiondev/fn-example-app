@@ -1,3 +1,6 @@
 .stack-work/
 livestream.cabal
 *~
+.idea
+cabal.config
+*.iml
