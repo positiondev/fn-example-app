@@ -1,0 +1,57 @@
+name:                livestream
+version:             0.1.0.0
+github:              "emhoracek/livestream"
+license:             BSD3
+author:              "Libby Horacek"
+maintainer:          "libby@daydrea.me"
+copyright:           "2018 Libby Horacek"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+synopsis:            Demo app for livestream
+category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/emhoracek/livestream#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies:
+  - fn
+  - wai
+  - text
+  - lucid
+
+executables:
+  livestream-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - livestream
+    - warp
+
+tests:
+  livestream-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - livestream
+    - hspec
+    - hspec-fn
+    - fn
