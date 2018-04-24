@@ -17,6 +17,8 @@ specs = do
  describe "index" $
    it "should 200" $
       get "/" >>= should200
- describe "hangman" $
+ describe "hangman" $ do
    it "should 200" $
       get "/hangman" >>= should200
+   it "shows the blanks" $
+      get "/hangman" >>= shouldHaveText "_ _ _ _ _ _ _"
