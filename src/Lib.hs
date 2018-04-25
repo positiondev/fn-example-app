@@ -22,8 +22,19 @@ site ctxt = route ctxt [ end ==> indexHandler
 indexHandler :: Context -> IO (Maybe Response)
 indexHandler ctxt = okText "Hello world!"
 
+data Hangman = NoGuesses | Head | Body | Arms | Legs | Hanged deriving (Eq, Ord, Show)
+
 word :: Text
 word = "haskell"
+
+tooManyGuesses :: [Char] -> Hangman
+tooManyGuesses [] = NoGuesses
+tooManyGuesses [_] = Head
+tooManyGuesses [_, _] = Body
+tooManyGuesses [_, _, _] = Arms
+tooManyGuesses [_, _, _, _] = Legs
+tooManyGuesses _ = Hanged
+
 
 match :: Text -> Text -> Text
 match word letters = Data.Text.intersperse ' ' (Data.Text.map charTransformer word)

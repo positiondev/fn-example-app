@@ -20,6 +20,15 @@ simpleSpecs = do
      match "wordtoguess" "g" `shouldBe` "_ _ _ _ _ _ g _ _ _ _"
    it "should produce correct output from guesses" $
      match "blah" "b" `shouldBe` "b _ _ _"
+  describe "tooManyGuesses" $ do
+    it "should map guesses to Hangman status" $ do
+      tooManyGuesses [] `shouldBe` NoGuesses
+      tooManyGuesses "" `shouldBe` NoGuesses
+      tooManyGuesses ['a'] `shouldBe` Head
+      tooManyGuesses ['a', 'b'] `shouldBe` Body
+      tooManyGuesses ['a', 'b', 'c'] `shouldBe` Arms
+      tooManyGuesses ['a', 'b', 'c', 'd'] `shouldBe` Legs
+      tooManyGuesses ['a', 'b', 'c', 'd', 'e'] `shouldBe` Hanged
 
 specs :: SpecWith (FnHspecState Context)
 specs = do
